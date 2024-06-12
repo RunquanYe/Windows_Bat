@@ -77,27 +77,8 @@ ECHO You selected Option 1.
 ECHO Process Completion: You need to input amount of seconds for countdown.
 ECHO.
 
-:op1door1
-ECHO.
-ECHO == Press N/n to process next step to input the PID.
-ECHO == Press B/b to to go back main menu.
-SET /P "confirmOption1=Proceed next step? (N/n, B/b):   " 
-
-IF /I "%confirmOption1%"=="N" (
-    GOTO inputCountDown
-) ELSE IF /I "%confirmOption1%"=="B" (
-    GOTO mainMenu
-) ELSE (
-    :: op1door1 Default Case
-    ECHO.
-    ECHO.
-    ECHO #######################################
-    ECHO Invalid choice. Please choose again.
-    ECHO #######################################
-    GOTO op1door1
-)
-
 :inputCountDown
+ECHO.
 SET /P countdown=Enter the number of seconds for the countdown: 
 :: Check if the input is a valid positive integer
 FOR /F "tokens=* delims=0123456789" %%A in ("%countdown%") do (
@@ -151,37 +132,11 @@ ECHO You selected Option 2.
 ECHO Process Completion: You need to input a the shutdown time in 24-hour format (HH:MM)
 ECHO.
 
-:op2door1
-ECHO.
-ECHO == Press N/n to process next step to input the PID.
-ECHO == Press B/b to to go back main menu.
-SET /P "confirmProcess2=Proceed next step? (N/n, B/b):  " 
-
-IF /I "%confirmProcess2%"=="N" (
-    GOTO inputShutdownTime
-) ELSE IF /I "%confirmProcess2%"=="B" (
-    GOTO mainMenu
-) ELSE (
-    :: op2door1 Default Case
-    ECHO.
-    ECHO.
-    ECHO #######################################
-    ECHO Invalid choice. Please choose again.
-    ECHO #######################################
-    GOTO op2door1
-)
-
-
 :inputShutdownTime
+ECHO.
 :: Prompt the user to enter the shutdown time in HH:MM format
 SET /P "shutdownTime=Please enter the shutdown time HH:MM(24h format):  " 
 
-:: Check if the input matches the HH:MM format using a regular expression
-ECHO %shutdownTime% | FINDSTR /R "[0-2][0-9]:[0-5][0-9]" >NUL
-IF ERRORLEVEL 1 (
-    ECHO Invalid time format! Please enter time in HH:MM 24h format.
-    GOTO askInput
-)
 
 :: Split the input time using the colon (:) delimiter
 for /F "tokens=1-2 delims=:" %%a in ("%shutdownTime%") do (
@@ -215,11 +170,7 @@ IF %inputHour% lss %currentHour% (
     GOTO scheduleShutdownTime
 )
 
-IF %inputMinute% lss %currentMinute% (
-    ECHO Notice: your schduled shutdown time is %inputHour%:%inputMinute%, and current time is %currentHour%:%currentMinute%.
-    ECHO         The schdule shutdown time is will be in next hour range.
-    GOTO scheduleShutdownTime
-)
+
 
 :scheduleShutdownTime
 ECHO.
@@ -286,6 +237,7 @@ IF /I "%confirmProcess3%"=="T" (
 
 
 :monitorProgram
+ECHO.
 :: Prompt the user to enter the PID
 SET /P "PID=Please enter the PID of the process you want to monitor:" 
 SET /P "checkProcess3=Do you want to shutdown the computer after the process(PID: %PID%) was completed? (Y/y, N/n):  "
