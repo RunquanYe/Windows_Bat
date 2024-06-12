@@ -166,7 +166,7 @@ FOR /F "tokens=1-2 delims=:" %%a in ("%time%") do (
 
 IF %inputHour% lss %currentHour% (
     ECHO Notice: your schduled shutdown time is %inputHour%:%inputMinute%, and current time is %currentHour%:%currentMinute%.
-    ECHO         The schdule shutdown time is will be a long wait.
+    ECHO         The schdule shutdown time is will be in next day.
     GOTO scheduleShutdownTime
 )
 
