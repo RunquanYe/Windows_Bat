@@ -4,11 +4,11 @@ Hello, 😄, to see more of my projects in other languages, please take a look a
 
 ---
 ## My Windows Bat Projects
-1. [Shutdown Helper](#shutdown-helper)
+1. [Shutdown Program](#shutdown-program)
 ---
 
-## Shutdown Helper
-I programmed a customized schdule shutdown helper Windows bat script to allow user to customized schduled program in mutiple ways, like countdown mode, schdule time mode, monitor and wait for process finished mode.  The program bult-in user instruction and my profile hyperlinks.
+## Shutdown Program
+I programmed a customized schdule shutdown program Windows bat script to allow user to customized schduled program in mutiple ways, like countdown mode, schdule time mode, monitor and wait for process finished mode.  The program bult-in user instruction and my profile hyperlinks.
 
-<p align="center"><img width="500" height="200" src="https://github.com/RunquanYe/Windows_Bat/blob/main/img/Shutdown_Helper_6.png"/></p>
+<p align="center"><img width="500" height="200" src="https://github.com/RunquanYe/Windows_Bat/blob/main/img/Shutdown_Program_6.png"/></p>
 ---
