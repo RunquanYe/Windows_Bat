@@ -10,6 +10,8 @@
 
 @ECHO OFF
 SETLOCAL enabledelayedexpansion
+
+TITLE Shutdown Program
 :: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global Variable~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SET PROCESS_CHECK_TIME=10
 SET WAIT_TIME=2
@@ -21,15 +23,15 @@ SET WAIT_TIME=2
 :mainMenu
 CLS
 ECHO This is a Shutdown Bat Program, it provide multiple customized shutdown options. 
-ECHO Programmer: Runquan Ye           Github:https://github.com/RunquanYe/DemoProjects
+powershell.exe -Command "Write-Host ([char]27 + '[37m')'Programmer: '([char]27 + '[33m')'Runquan Ye' ([char]27 + '[37m') 'Github:' ([char]27 + '[34m')'https://github.com/RunquanYe/DemoProjects'([char]27 + '[0m')"
 ECHO Please choose an following option:
-ECHO ---------------------------------------------------------------------------------
-ECHO == Press 1 to schdule a shutdown after a customized countdown.
-ECHO == Press 2 to schdule a shutdown at a specific time in HH:MM(24h) format.
-ECHO == Press 3 to schdule a shutdown after specific process was done with provided PID.
-ECHO == Press (H, h) to display help instruction for this countdown Program
-ECHO == Press (D, d) to display programmer introduction.
-ECHO == Press (E, e) to exit the program.
+ECHO -------------------------------------------------------------------------------------------
+powershell.exe -Command "Write-Host ([char]27 + '[36m')'==> Press 1 to schdule a shutdown after a customized countdown.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[36m')'==> Press 2 to schdule a shutdown at a specific time in HH:MM(24h) format.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[36m')'==> Press 3 to schdule a shutdown after specific process was done with provided PID.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[32m')'==> Press (H, h) to display help instruction for this countdown Program.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[33m')'==> Press (D, d) to display programmer introduction.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'==> Press (E, e) to exit the program.'([char]27 + '[0m')"
 
 ECHO.
 SET /P "option=Enter your choice (1, 2, 3, H/h, D/d, E/e):  "
@@ -56,13 +58,13 @@ IF "%option%"=="1" (
 :userGuide
 ECHO.
 ECHO.
-ECHO Program Instruction:
+powershell.exe -Command "Write-Host ([char]27 + '[47;30m')'Program Instruction:'([char]27 + '[0m')"
 ECHO -----------------------------------------------------------------------------------------------------------------
 ECHO This program allows you to schedule a shutdown in multiple ways:
-ECHO    Option 1. Countdown: You can set a timer to shutdown the system after a specified number of seconds.
-ECHO    Option 2. Specific Time: You can set a specific time in HH:MM format to shutdown the system.
-ECHO    Option 3. Process Completion: You can provide a PID, and the system will shutdown once the process is done.
-ECHO == Note: This file cannot be renamed as 'shutdown'.
+powershell.exe -Command "Write-Host ([char]27 + '[38;5;51m')'    Option 1. Countdown: You can set a timer to shutdown the system after a specified number of seconds.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[38;5;46m')'    Option 2. Specific Time: You can set a specific time in HH:MM format to shutdown the system.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 +'[38;5;201m')'    Option 3. Process Completion: You can provide a PID, and the system will shutdown once the process is done.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'== Note: This file cannot be renamed as 'shutdown'.'([char]27 + '[0m')"
 ECHO -----------------------------------------------------------------------------------------------------------------
 ECHO.
 PAUSE
@@ -73,8 +75,8 @@ GOTO mainMenu
 :: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Option 1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :option1
 CLS
-ECHO You selected Option 1.
-ECHO Process Completion: You need to input amount of seconds for countdown.
+powershell.exe -Command "Write-Host ([char]27 + '[47;30m')'You selected Option 1.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'Process Requirement: '([char]27 + '[37m')'You need to input amount of seconds for countdown.'([char]27 + '[0m')"
 ECHO.
 
 :inputCountDown
@@ -95,7 +97,7 @@ IF %countdown% leq 0 (
 
 :option1door2
 ECHO.
-ECHO == Press B/b to to go back main menu.
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'==> Press B/b to to go back main menu.'([char]27 + '[0m')"
 SET /P "checkProcess1=Are you sure to shutdown the computer in %countdown% seconds? (Y/y, N/n):  "
 IF /I "%checkProcess1%"=="Y" (
     GOTO countdown
@@ -128,8 +130,8 @@ EXIT
 :: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Option 2~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :option2
 CLS
-ECHO You selected Option 2.
-ECHO Process Completion: You need to input a the shutdown time in 24-hour format (HH:MM)
+powershell.exe -Command "Write-Host ([char]27 + '[47;30m')'You selected Option 2.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'Process Requirement: '([char]27 + '[37m')'You need to input a the shutdown time in 24-hour format (HH:MM)'([char]27 + '[0m')"
 ECHO.
 
 :inputShutdownTime
@@ -174,7 +176,7 @@ IF %inputHour% lss %currentHour% (
 
 :scheduleShutdownTime
 ECHO.
-ECHO == Press B/b to to go back main menu.
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'==> Press B/b to to go back main menu.'([char]27 + '[0m')"
 SET /P "checkProcess2=Are you sure to shutdown the computer at %inputHour%:%inputMinute% ? (Y/y, N/n):  "
 IF /I "%checkProcess2%"=="Y" (
     :: Create a scheduled task to shut down the computer at the specified time
@@ -198,22 +200,22 @@ IF /I "%checkProcess2%"=="Y" (
 :: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Option 3~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 :option3
 CLS
-ECHO You selected Option 3.
-ECHO Process Completion: You need to provide a PID, and the system will shutdown once the process is done.
+powershell.exe -Command "Write-Host ([char]27 + '[47;30m')'You selected Option 3.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'Process Requirement: '([char]27 + '[37m')'You need to provide a PID, and the system will shutdown once the process is done.'([char]27 + '[0m')"
 ECHO.
 
 :getPID
 ECHO ------------------------------------------------------------------------------------------------------------------------
 ECHO How to find the specific PID of the process?
-ECHO Way 1: Open Command Prompt and type "tasklist" to get a list of all running processes along with their PIDs.
-ECHO Way 2: Press "Ctrl" + "Shift" + "Esc" to open Task Manager, go to the "Details" tab, and find the "PID" of the program.
+ECHO   Way 1: Open Command Prompt and type "tasklist" to get a list of all running processes along with their PIDs.
+ECHO   Way 2: Press "Ctrl" + "Shift" + "Esc" to open Task Manager, go to the "Details" tab, and find the "PID" of the program.
 ECHO ------------------------------------------------------------------------------------------------------------------------
 
 :op3door1
 ECHO.
-ECHO == Press T/t to display current tasklist.
-ECHO == Press N/n to process next step to input the PID.
-ECHO == Press B/b to to go back main menu.
+powershell.exe -Command "Write-Host ([char]27 + '[32m')'==> Press T/t to display current tasklist.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[34m')'==> Press N/n to process next step to input the PID.'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[31m')'==> Press B/b to to go back main menu.'([char]27 + '[0m')"
 SET /P "confirmProcess3=Proceed next step? (T/t, N/n, B/b):  " 
 
 IF /I "%confirmProcess3%"=="T" (
@@ -246,9 +248,9 @@ IF /I "%checkProcess3%"=="Y" (
     ECHO Monitoring process, PID %PID% ...
     GOTO check_pid
 ) ELSE (
-    ECHO Cancel the action. Go back to reselect the target PID.
+    ECHO Cancel the action. Go back to main menu.
     TIMEOUT /T %WAIT_TIME% /NOBREAK >NUL
-    GOTO op3door1
+    GOTO mainMenu
 )
 
 :: Loop to check if the process with the given PID is running
@@ -282,14 +284,14 @@ ENDLOCAL & EXIT
 :programmer
 ECHO.
 ECHO.
-ECHO Programmer Introduction:
+powershell.exe -Command "Write-Host ([char]27 + '[47;30m')'Programmer Introduction:'([char]27 + '[0m')"
 ECHO ***********************************************************************************************
 ECHO    This program was created by Runquan Ye. It provides flexible shutdown scheduling options.
 ECHO    Thank you for using my customized shutdown bat script. Hope you like it. 
 ECHO    More info about me, please visit my relative account pages.
-ECHO        Github:     https://github.com/RunquanYe
-ECHO        Demo:       https://github.com/RunquanYe/DemoProjects
-ECHO        Linkedin:   https://www.linkedin.com/in/runquanye
+powershell.exe -Command "Write-Host ([char]27 + '[38;5;46m')'    Github:     '([char]27 + '[32m')'https://github.com/RunquanYe'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[38;5;226m')'    Demo:       '([char]27 + '[33m')'https://github.com/RunquanYe/DemoProjects'([char]27 + '[0m')"
+powershell.exe -Command "Write-Host ([char]27 + '[38;5;21m')'    Linkedin:   '([char]27 + '[34m')'https://www.linkedin.com/in/runquanye'([char]27 + '[0m')"
 ECHO ***********************************************************************************************
 ECHO.
 PAUSE
